@@ -1,27 +1,28 @@
 import React from 'react';
 import './contact.css'
-
-const user = {
-    name: 'Porter Parker',
-    avatar: 'https://randomuser.me/api/portraits/men/4.jpg',
-    status: false,
-}
+import propTypes from 'prop-types'
 
 
-const Contact = () => {
+const Contact = props => {
     return (
     <div className="Contact">
-        <img src={user.avatar} className="avatar" alt='' />
+        <img src={props.user.avatar} className="avatar" alt='' />
         <div>
-            <p className='name'>{user.name}</p> 
+            <p className='name'>{props.user.name}</p> 
             <div className='status'>
-                {user.status?  <span className='status-online'></span> : <span className='status-offline'></span>}
-                <p className='status-text'>{user.status? 'Online': 'Offline'}</p>
+                <span className={props.user.status? 'status-online' : 'status-offline' }></span>
+                <p className='status-text'>{props.user.status? 'Online': 'Offline'}</p>
             </div>
         </div>
     </div>
     )
 }
+
+Contact.propTypes = {
+    name: propTypes.string,
+    status: propTypes.bool,
+}
+
 
 export default Contact;
 
