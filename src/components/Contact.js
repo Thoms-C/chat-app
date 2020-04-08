@@ -3,19 +3,33 @@ import './contact.css'
 import propTypes from 'prop-types'
 
 
-const Contact = props => {
-    return (
-    <div className="Contact">
-        <img src={props.avatar} className="avatar" alt='' />
-        <div>
-            <p className='name'>{props.name}</p> 
-            <div className='status'>
-                <span className={props.status? 'status-online' : 'status-offline' }></span>
-                <p className='status-text'>{props.status? 'Online': 'Offline'}</p>
+class Contact extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            online: props.status
+        }
+    }
+    render() {
+        return (
+            <div className="Contact">
+                <img src={this.props.avatar} className="avatar" alt='' />
+                <div>
+                    <p className='name'>{this.props.name}</p> 
+                    <div 
+                    className='status'
+                    onClick={event => {
+                        const offline = !this.state.online;
+                        this.setState({ online: offline})
+                        }}
+                    >
+                        <span className={this.state.online? 'status-online' : 'status-offline' }></span>
+                        <p className='status-text'>{this.state.online? 'Online': 'Offline'}</p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    )
+        )
+    }
 }
 
 Contact.propTypes = {
@@ -25,7 +39,3 @@ Contact.propTypes = {
 
 
 export default Contact;
-
-
-
-
